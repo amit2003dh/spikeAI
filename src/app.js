@@ -8,6 +8,19 @@ const PORT = 8080;
 
 app.use(bodyParser.json());
 
+// Serve static files from src (for ui.html)
+app.use(express.static(__dirname));
+
+// Serve the UI at /ui
+app.get('/ui', (req, res) => {
+    res.sendFile(__dirname + '/ui.html');
+});
+
+// Add a simple GET / route
+app.get('/', (req, res) => {
+    res.send('Welcome to spikeAI server! Use POST /query to interact.');
+});
+
 app.post('/query', async (req, res) => {
     try {
         const { query, propertyId } = req.body;

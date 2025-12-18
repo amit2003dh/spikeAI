@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>spikeAI Query UI</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f7f7f7; margin: 0; padding: 0; }
+        .container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #333; }
+        label { display: block; margin-top: 20px; color: #555; }
+        input, textarea { width: 100%; padding: 10px; margin-top: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        button { margin-top: 20px; width: 100%; padding: 12px; background: #007bff; color: #fff; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .output { margin-top: 30px; background: #f1f1f1; padding: 15px; border-radius: 4px; min-height: 40px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>spikeAI Query Interface</h2>
+        <form id="queryForm">
+            <label for="query">Query:</label>
+            <textarea id="query" name="query" rows="3" required></textarea>
+            <label for="propertyId">Property ID (optional):</label>
+            <input type="text" id="propertyId" name="propertyId">
+            <button type="submit">Send Query</button>
+        </form>
+        <div class="output" id="output"></div>
+    </div>
+    <script>
+        document.getElementById('queryForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const query = document.getElementById('query').value;
+            const propertyId = document.getElementById('propertyId').value;
+            const outputDiv = document.getElementById('output');
+            outputDiv.textContent = 'Loading...';
+            try {
+                const response = await fetch('/query', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query, propertyId })
+                });
+                const data = await response.json();
+                outputDiv.textContent = JSON.stringify(data, null, 2);
+            } catch (err) {
+                outputDiv.textContent = 'Error: ' + err.message;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run spikeAI project",
+			"type": "shell",
+			"command": "node src/app.js",
+			"args": [],
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}
