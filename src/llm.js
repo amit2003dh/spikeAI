@@ -5,7 +5,7 @@ require('dotenv').config(); // Ensure you have dotenv installed
 // HARDCODE API KEY FOR HACKATHON or use ENV
 // Note: In production/submission, use process.env, but for the hackathon script 
 // they might inject it differently. Best to use ENV variable.
-const apiKey = process.env.LITELLM_API_KEY || "sk-Njm7bQTeLrhVOuZd9eagew"; 
+const apiKey = process.env.LITELLM_API_KEY ; 
 
 const client = new OpenAI({
     apiKey: apiKey,
