@@ -12,12 +12,12 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
 // Serve the UI at /ui
-app.get('/ui', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(__dirname + '/ui.html');
 });
 
 // Add a simple GET / route
-app.get('/', (req, res) => {
+app.get('/ui', (req, res) => {
     res.send('Welcome to spikeAI server! Use POST /query to interact.');
 });
 
