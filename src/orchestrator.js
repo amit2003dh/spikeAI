@@ -4,7 +4,7 @@ const { runAnalyticsAgent } = require('./agents/ga4Agent');
 const { runSEOAgent } = require('./agents/seoAgent');
 
 async function orchestrate(userQuery, propertyId) {
-    console.log(`🤖 Orchestrator processing: "${userQuery}"`);
+    console.log(`Orchestrator processing: "${userQuery}"`);
 
     // 1. Detect Intent
     const systemPrompt = `
@@ -22,7 +22,7 @@ async function orchestrate(userQuery, propertyId) {
     ], true);
 
     const intentData = JSON.parse(intentRaw);
-    console.log(`🧭 Intent Detected: ${intentData.intent}`);
+    console.log(`Intent Detected: ${intentData.intent}`);
 
     let result;
 
@@ -50,7 +50,7 @@ async function orchestrate(userQuery, propertyId) {
             const safeSEO = Array.isArray(seoData) ? seoData.slice(0, 50) : seoData;
 
             // 3. Fusion by LLM
-            console.log("🔗 Merging data...");
+            console.log("Merging data...");
             result = await callLLM([
                 { role: "system", content: "You are a Data Analyst. Combine the provided Google Analytics data and SEO Audit data to answer the user's request. Match page paths (e.g., /home) with full URLs if necessary." },
                 { role: "user", content: `User Query: ${userQuery}\n\nGA4 Data:\n${JSON.stringify(safeGA4)}\n\nSEO Audit Data:\n${JSON.stringify(safeSEO)}` }

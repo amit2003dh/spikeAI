@@ -8,20 +8,20 @@ const SHEET_ID = "1zzf4ax_H2WiTBVrJigGjF2Q3Yz-qy2qMCbAMKvl6VEE";
 const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=1438203274`;
 
 async function fetchSEOData() {
-    console.log(`📥 Downloading Sheet...`);
+    console.log(` Downloading Sheet...`);
     try {
         const response = await axios.get(CSV_URL);
         // DEBUG: Print first 100 characters to ensure we got CSV, not HTML
-        console.log(`📄 Raw Data Preview: ${response.data.substring(0, 100)}...`);
+        console.log(`Raw Data Preview: ${response.data.substring(0, 100)}...`);
         
         const records = parse(response.data, {
             columns: true,
             skip_empty_lines: true
         });
-        console.log(`✅ Parsed ${records.length} rows from Sheet.`);
+        console.log(` Parsed ${records.length} rows from Sheet.`);
         return records;
     } catch (error) {
-        console.error("❌ Error fetching sheet:", error.message);
+        console.error("Error fetching sheet:", error.message);
         return [];
     }
 }
