@@ -17,9 +17,15 @@ app.get('/', (req, res) => {
 });
 
 // Add a simple GET / route
+<<<<<<< HEAD
 // app.get('/', (req, res) => {
 //     res.send('Welcome to spikeAI server! Use POST /query to interact.');
 // });
+=======
+app.get('/ui', (req, res) => {
+    res.send('Welcome to spikeAI server! Use POST /query to interact.');
+});
+>>>>>>> 525e3281940613751def26739a1128fd8bbd3054
 
 app.post('/query', async (req, res) => {
     try {
